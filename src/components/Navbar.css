@@ -1,0 +1,81 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2e51a2;
+    color: #f9f9f9;
+    padding: 0 112px;
+    min-height: 8vh;
+}
+
+.nav-brand>span {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-search {
+    display: flex;
+    width: 30%;
+    align-items: center;
+}
+
+.nav-search .icon {
+    padding: 10px;
+    size: 16px;
+    background-color: #e1e7f5;
+    color: #2e51a2;
+}
+
+.nav-search>button {
+    border: 0;
+    border-radius: 0;
+    height: 36px;
+    cursor: pointer;
+}
+
+.nav-search>input {
+    display: flex;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    height: 36px;
+    width: 100%;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    padding: 10px 16px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 48px;
+    justify-content: right;
+}
+
+.nav-links>li>a {
+    color: #f9f9f9;
+    font-size: 16px;
+    font-weight: 550;
+    letter-spacing: 2px;
+}
+
+.search-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.burger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.burger-menu>div {
+    width: 32px;
+    height: 2px;
+    background-color: #f9f9f9;
+    margin: 8px;
+}
+
+@media (min-width: 10px) {}

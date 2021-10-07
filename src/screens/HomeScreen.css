@@ -1,0 +1,31 @@
+.welcome-title {
+    text-align: center;
+    background-color: #e1e7f5;
+    padding: 8px;
+    margin: 8px auto;
+}
+
+.homescreen {
+    max-width: 1534px;
+    margin: auto;
+    padding: 8px;
+    background-color: #fff;
+}
+
+.anime-list-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homescreen>hr {
+    margin: 1px 0 16px;
+}
+
+.anime-list-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    /* overflow-x: visible;
+    overflow-y: hidden; */
+}

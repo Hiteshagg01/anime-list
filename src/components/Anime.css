@@ -1,0 +1,28 @@
+.anime-container {
+    position: relative;
+    width: fit-content;
+    height: 318px;
+    transition: all 0.2s ease-out;
+}
+
+.anime-container img {
+    margin: 0;
+}
+
+.anime-container:hover {
+    transform: scale(1.04);
+}
+
+/* .anime-container img {
+    max-width: 85%;
+    height: auto;
+} */
+
+.anime-container p {
+    position: absolute;
+    bottom: 10px;
+    left: 16px;
+    right: 8px;
+    color: #fff;
+    font-weight: 600;
+}

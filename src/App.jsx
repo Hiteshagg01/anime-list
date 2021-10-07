@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 // Screens
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
+import AnimeTable from './screens/AnimeTable';
 import AnimeScreen from './screens/AnimeScreen';
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={HomeScreen} />
         <Route exact path='/about' component={AboutScreen} />
-        <Route exact path='/anime' component={AnimeScreen} />
+        <Route path='/animes/:type' component={AnimeTable} />
+        <Route path='/anime/:name' component={AnimeScreen} />
       </Switch>
     </BrowserRouter>
   );

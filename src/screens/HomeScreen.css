@@ -25,7 +25,14 @@
 .anime-list-container {
     display: flex;
     gap: 16px;
+    align-items: center;
     margin-bottom: 32px;
-    /* overflow-x: visible;
-    overflow-y: hidden; */
+    overflow-x: scroll;
+    overflow-y: visible;
+    height: 350px;
+}
+
+.anime-list-container:hover {
+    overflow-x: scroll;
+    overflow-y: visible;
 }

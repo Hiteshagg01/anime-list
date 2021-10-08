@@ -32,14 +32,20 @@
     margin: 4px auto 8px;
 }
 
+.statistics-and-trailer {
+    display: flex;
+    gap: 8px;
+}
+
 .statistics {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 16px;
+    width: stretch;
     text-align: center;
     background-color: #eee;
-    margin: 16px auto;
+    margin: auto;
 }
 
 .statistics span {

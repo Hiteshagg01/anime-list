@@ -7,22 +7,21 @@
 
 .anime-container img {
     margin: 0;
+    height: 318px;
+    width: 225px;
 }
 
 .anime-container:hover {
     transform: scale(1.04);
 }
 
-/* .anime-container img {
-    max-width: 85%;
-    height: auto;
-} */
-
 .anime-container p {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
     position: absolute;
-    bottom: 10px;
-    left: 16px;
-    right: 8px;
+    padding: 8px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     color: #fff;
     font-weight: 600;
 }

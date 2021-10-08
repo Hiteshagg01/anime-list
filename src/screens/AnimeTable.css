@@ -1,0 +1,26 @@
+.animetable {
+    max-width: 1534px;
+    margin: 16px auto;
+}
+
+table, th, td {
+    border: 1px solid #808080;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 16px;
+}
+
+.animetable thead {
+    background-color: #2e51a2;
+    color: #fff;
+    border: 1px solid #808080;
+}
+
+.anime-detail {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border: none;
+}

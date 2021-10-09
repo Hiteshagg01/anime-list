@@ -1,5 +1,6 @@
 import './HomeScreen.css'
 
+
 // Components
 import SeasonAnime from '../components/HomeComponents/SeasonAnime'
 import AiringAnime from '../components/HomeComponents/AiringAnime'
@@ -8,14 +9,6 @@ import PopularAnime from '../components/HomeComponents/PopularAnime'
 
 
 const HomeScreen = () => {
-
-    // const dispatch = useDispatch()
-
-    // const { loading, anime, error } = useSelector(state => state.getAnime)
-
-    // useEffect(() => {
-    //     dispatch(getAnime('season', season))
-    // }, [dispatch, season])
 
     return <>
 

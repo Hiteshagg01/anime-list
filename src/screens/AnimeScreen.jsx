@@ -1,104 +1,122 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import animeAction from '../redux/actions/animeAction';
 import './AnimeScreen.css'
 
-const AnimeScreen = () => {
-    const mem = 1270756;
+const AnimeScreen = ({ match }) => {
+
+    const dispatch = useDispatch()
+
+    const { loading, animeData, error } = useSelector(state => state.specificAnime)
+
+    useEffect(() => {
+        dispatch(animeAction(match.params.id))
+    }, [dispatch, match.params.id])
+
+
     return (
-        <div className="animescreen">
-
-            <div className="anime-title">
-                <strong>Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai</strong>
-                <p>Rascal Does Not Dream of Bunny Girl Senpai</p>
-            </div>
-
-            <div className="anime-about">
-                <div className="left-side-content">
-                    <img src="https://cdn.myanimelist.net/images/anime/1301/93586.jpg?s=f19bb396363ae0caf8f1e1e8c17b49ac" alt="bunny" />
-                    <div className="information">
-                        <strong>Information</strong>
-                        <hr />
-                        <p>
-                            <strong>Type: </strong>
-                            TV
-                        </p>
-                        <p>
-                            <strong>Episodes: </strong>
-                            13
-                        </p>
-                        <p>
-                            <strong>Status: </strong>
-                            Finished airing
-                        </p>
-                        <p>
-                            <strong>Aired: </strong>
-                            Oct 4, 2018 to Dec 27, 2018
-                        </p>
-                        <p>
-                            <strong>Premiered: </strong>
-                            Fall 2018
-                        </p>
-                        <p>
-                            <strong>Studios: </strong>
-                            CloverWorks
-                        </p>
-                        <p>
-                            <strong>Genres: </strong>
-                            Comedy, Drama, Romance, Supernatural
-                        </p>
-                        <p>
-                            <strong>Source: </strong>
-                            Light Novel
-                        </p>
-                    </div>
-                </div>
-                <hr />
-                <div className="right-side-content">
-                    <div className="statistics-and-trailer">
-                        <div className="statistics">
-                            <p>
-                                <span>SCORE</span>
-                                <br />
-                                <strong>8.31</strong>
-                            </p>
-                            <p>Ranked
-                                <br />
-                                <strong>#216</strong>
-                            </p>
-                            <p>Popularity
-                                <br />
-                                <strong>#62</strong>
-                            </p>
-                            <p>Members
-                                <br />
-                                <strong>{mem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>
-                            </p>
+        <div className="animescreen" key={animeData.mal_id}>
+            {loading ?
+                <h1>Loading...</h1> :
+                error ?
+                    <h1>{error}</h1> :
+                    <>
+                        <div className="anime-title" key={animeData.mal_id}>
+                            <h4>{animeData.title}</h4>
+                            <p>{animeData.title_english}</p>
                         </div>
-                        <div>
-                            <iframe src="https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1" width="400" height="225" frameBorder="0" title="Trailer" />
+
+                        <div className="anime-about">
+                            <div className="left-side-content">
+                                <img src={animeData.image_url} alt={animeData.title} />
+                                <div className="information">
+                                    <strong>Information</strong>
+                                    <hr />
+                                    <p>
+                                        <strong>Type: </strong>
+                                        {animeData.type}
+                                    </p>
+                                    <p>
+                                        <strong>Episodes: </strong>
+                                        {animeData.episodes || 'N/A'}
+                                    </p>
+                                    <p>
+                                        <strong>Status: </strong>
+                                        {animeData.status || 'N/A'}
+                                    </p>
+                                    <p>
+                                        <strong>Aired: </strong>
+                                        {animeData.aired.string ? animeData.aired.string : 'N/A'}
+                                    </p>
+                                    <p>
+                                        <strong>Premiered: </strong>
+                                        {animeData.premiered || 'N/A'}
+                                    </p>
+                                    <p>
+                                        <strong>Studios: </strong>
+                                        {animeData.studios.map(studio => studio.name + ', ')}
+                                    </p>
+                                    <p>
+                                        <strong>Genres: </strong>
+                                        {animeData.genres.map(genre => genre.name + ', ')}
+                                    </p>
+                                    <p>
+                                        <strong>Source: </strong>
+                                        {animeData.source || 'N/A'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div className="right-side-content">
+                                <div className="statistics-and-trailer">
+                                    <div className="statistics">
+                                        <p>
+                                            <span>SCORE</span>
+                                            <br />
+                                            <strong>{animeData.score || 'N/A'}</strong>
+                                        </p>
+                                        <p>Ranked
+                                            <br />
+                                            <strong>#{animeData.rank ? animeData.rank.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 'N/A'}</strong>
+                                        </p>
+                                        <p>Popularity
+                                            <br />
+                                            <strong>#{animeData.popularity ? animeData.popularity.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 'N/A'}</strong>
+                                        </p>
+                                        <p>Members
+                                            <br />
+                                            <strong>{animeData.members ? animeData.members.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 'N/A'}</strong>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <iframe src={animeData.trailer_url} width="400" height="225" frameBorder="0" title="Trailer" />
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <strong>Synopsis: </strong>
+                                <hr />
+                                <p>
+                                    {animeData.synopsis || 'No Data Availabe'}
+                                </p>
+
+                                <br />
+
+                                <strong>Opening Theme:</strong>
+                                <hr />
+                                {animeData.opening_themes.map(op => <p>{op}</p>)}
+
+                                <br />
+
+                                <strong>Ending Theme:</strong>
+                                <hr />
+                                {animeData.ending_themes.map(outro => <p>{outro}</p>)}
+                            </div>
                         </div>
-                    </div>
-
-                    <br />
-
-                    <strong>Synopsis: </strong>
-                    <hr />
-                    <p>
-                        The rare and inexplicable Puberty Syndrome is thought of as a myth.It is a rare disease which only affects teenagers, and its symptoms are so supernatural that hardly anyone recognizes it as a legitimate occurrence.However, high school student Sakuta Azusagawa knows from personal experience that it is very much real, and happens to be quite prevalent in his school.Mai Sakurajima is a third-year high school student who gained fame in her youth as a child actress, but recently halted her promising career for reasons unknown to the public.With an air of unapproachability, she is well known throughout the school, but none dare interact with her—that is until Sakuta sees her wandering the library in a bunny girl costume.Despite the getup, no one seems to notice her, and after confronting her, he realizes that she is another victim of Puberty Syndrome.As Sakuta tries to help Mai through her predicament, his actions bring him into contact with more girls afflicted with the elusive disease.[Written by MAL Rewrite]
-                    </p>
-                    <br />
-                    <strong>Opening Theme:</strong>
-                    <hr />
-                    <p>"Kimi no Sei (君のせい)" by the peggies</p>
-                    <br />
-                    <strong>Ending Theme:</strong>
-                    <hr />
-                    <p>"1:"Fukashigi no Carte (不可思議のカルテ)" by Mai Sakurajima (Asami Seto), Tomoe Koga (Nao Touyama), Rio Futaba (Atsumi Tanezaki), Nodoka Toyohama (Maaya Uchida), Kaede Azusawara (Yurika Kubo), Shouko Makinohara (Inori Minase)(eps 1,13)"</p>
-                    <p>2:"Fukashigi no Carte (不可思議のカルテ)" by Mai Sakurajima (Asami Seto)(eps 2-3)</p>
-                    <p>3:"Fukashigi no Carte (不可思議のカルテ)" by Tomoe Koga (Nao Touyama)(eps 4-5)</p>
-                    <p>4:"Fukashigi no Carte (不可思議のカルテ)" by Rio Futaba (Atsumi Tanezaki)(eps 7-8)</p>
-                    <p>5:"Fukashigi no Carte (不可思議のカルテ)" by Nodoka Toyohama (Maaya Uchida)(eps 9-10)</p>
-                    <p>6:"Fukashigi no Carte (不可思議のカルテ)" by Kaede Azusawara (Yurika Kubo)(eps 11-12)</p>
-                </div>
-            </div>
+                    </>}
         </div>
     )
 }

@@ -5,7 +5,7 @@ const Anime = ({ animeData }) => {
     return (
         <Link to={`/anime/${animeData.mal_id}/${animeData.title}`}>
             <div className="anime-container">
-                <img src={animeData.image_url} alt="bunny girl senpai" />
+                <img src={animeData.image_url} alt={animeData.title} />
                 <p>{animeData.title}</p>
             </div>
         </Link>

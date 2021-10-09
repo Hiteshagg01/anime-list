@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 
 // Reudx
-import store from './redux/store';
-import { Provider } from 'react-redux';
+import store from './redux/store'
+import { Provider } from 'react-redux'
 
 
 ReactDOM.render(

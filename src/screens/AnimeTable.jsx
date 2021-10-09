@@ -1,9 +1,25 @@
 import { Link } from 'react-router-dom'
+
+// Redux
+import { useSelector } from 'react-redux';
+
 import './AnimeTable.css'
 
 
 const AnimeTable = ({ match }) => {
-    console.log(match);
+
+    const { loading, anime, error } = useSelector(state =>
+        match.params.type === '2021' ?
+            state.seasonAnime :
+            match.params.subtype === 'airing' ?
+                state.topAiring :
+                match.params.subtype === 'bypopularity' ?
+                    state.topPopular :
+                    match.params.subtype === 'upcoming' ?
+                        state.topUpcoming :
+                        match.path === '/search/:name' ?
+                            state.search : null
+    )
 
     return (
         <div className="animetable">
@@ -17,28 +33,36 @@ const AnimeTable = ({ match }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            1
-                        </td>
-                        <td className="anime-detail">
-                            <img src="https://cdn.myanimelist.net/images/anime/1301/93586.jpg?s=f19bb396363ae0caf8f1e1e8c17b49ac" heigh="auto" width="10%" alt="bunny girl" />
-                            <div>
-                                <Link to="/anime/37450/Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai">
-                                    <h4>Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai</h4>
-                                </Link>
-                                <p>Type: TV</p>
-                                <p>Episodes: 13</p>
-                                <p>Status: Finished airing</p>
-                            </div>
-                        </td>
-                        <td>
-                            <i className="fas fa-star"></i> 8.31
-                        </td>
-                        <td>
-                            Action
-                        </td>
-                    </tr>
+                    {
+                        loading ? <tr><td><h1>Loading...</h1></td></tr> :
+                            error ? <tr><td><h1>{error}</h1></td></tr> :
+                                anime.map((animedata, index) => !animedata.r18 &&
+                                    <tr key={animedata.mal_id} >
+                                        <td>
+                                            {++index}
+                                        </td>
+                                        <td>
+                                            <div className="anime-detail">
+                                                <img src={animedata.image_url} heigh="auto" width="12%" alt={animedata.title} />
+                                                <div>
+                                                    <Link to={`/anime/${animedata.mal_id}/${animedata.title}`}>
+                                                        <h4>{animedata.title}</h4>
+                                                    </Link>
+                                                    <p>Type: {animedata.type || 'N/A'} </p>
+                                                    <p>Episodes: {animedata.episodes || 'N/A'}</p>
+                                                    <p>Source: {animedata.source}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i className="fas fa-star"></i> {animedata.score ? animedata.score : 'N/A'}
+                                        </td>
+                                        <td>
+                                            {animedata.genres ? animedata.genres.map(genre => genre.name + ', ') : 'N/A'}
+                                        </td>
+                                    </tr>
+                                )
+                    }
                 </tbody>
             </table>
         </div>

@@ -42,7 +42,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 16px;
-    width: stretch;
+    width: -webkit-fill-available;
     text-align: center;
     background-color: #eee;
     margin: auto;

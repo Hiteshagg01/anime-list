@@ -1,21 +1,16 @@
 import './Navbar.css'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+
+// Components
+import Search from './Search'
 
 const Navbar = () => {
-    const [searchAnime, setSearchAnime] = useState("")
-
     return (
         <nav className="navbar">
             <div className="nav-brand">
                 <span>Anime List</span>
             </div>
-            <form className="nav-search" typeof="submit">
-                <input type="text" placeholder="Search Anime" value={searchAnime} onChange={(e) => setSearchAnime(e.target.value)} />
-                <button onClick={() => console.log(searchAnime)}>
-                    <i className="fas fa-search icon"></i>
-                </button>
-            </form>
+            <Search />
             <ul className="nav-links">
                 <li><Link to="/">
                     Home

@@ -9,7 +9,6 @@
     max-width: 1534px;
     margin: auto;
     padding: 8px;
-    background-color: #fff;
 }
 
 .anime-list-name {
@@ -18,8 +17,12 @@
     align-items: center;
 }
 
+.anime-list-name h3 {
+    color: #2e51a2;
+}
+
 .homescreen>hr {
-    margin: 1px 0 16px;
+    margin: 4px 0 16px;
 }
 
 .anime-list-container {
@@ -27,12 +30,9 @@
     gap: 16px;
     align-items: center;
     margin-bottom: 32px;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: visible;
-    height: 350px;
-}
-
-.anime-list-container:hover {
-    overflow-x: scroll;
-    overflow-y: visible;
+    height: 366px;
+    background-color: #fff;
+    padding: 8px;
 }
